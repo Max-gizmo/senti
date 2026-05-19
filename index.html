@@ -179,8 +179,9 @@ button { font-family: inherit; }
   margin-left: 6px; display: flex; gap: 6px; align-items: center;
 }
 .island-cta .ghost {
-  color: rgba(255,255,255,0.78); padding: 9px 14px; border-radius: 999px;
-  font-size: 14px; font-weight: 500; transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out);
+  color: #fff; padding: 9px 14px; border-radius: 999px;
+  font-size: 14px; font-weight: 700; letter-spacing: -0.01em;
+  transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out);
 }
 .island-cta .ghost:hover { color: white; background: rgba(255,255,255,0.08); }
 .island-cta .signup {
@@ -296,6 +297,7 @@ button { font-family: inherit; }
 .promo-carousel {
   position: relative; overflow: hidden;
   margin: 28px 0 32px; border-radius: var(--radius-lg);
+  max-width: 420px;
 }
 .promo-track {
   display: flex; transition: transform 500ms var(--ease-out); will-change: transform;
@@ -428,7 +430,7 @@ button { font-family: inherit; }
 }
 .phone-tabs button.on { background: white; color: var(--ink-1000); }
 
-.crypto-list { padding: 0 14px 90px; display: flex; flex-direction: column; gap: 4px; }
+.crypto-list { padding: 0 14px 14px; display: flex; flex-direction: column; gap: 4px; }
 .crypto-row {
   display: grid; grid-template-columns: 36px 1fr 70px 76px; gap: 12px;
   align-items: center; padding: 12px 12px;
@@ -852,8 +854,7 @@ footer.foot {
             <div class="phone-island-inner"></div>
             <div class="phone-header">
               <div>
-                <div class="balance-eyebrow">Портфель</div>
-                <div class="balance">$24 318<span class="dec">.42</span></div>
+                <div class="balance-eyebrow">Котировки</div>
               </div>
               <div class="live-pill"><span class="dot"></span>В ЭФИРЕ</div>
             </div>
@@ -865,12 +866,6 @@ footer.foot {
               <button data-tab="forex2">Fx</button>
             </div>
             <div class="crypto-list" id="cryptoList"></div>
-            <div class="phone-fab">
-              <span class="right">
-                <span class="price" id="fab-price">$68 412</span>
-                <span>→</span>
-              </span>
-            </div>
           </div>
         </div>
       </div>
@@ -1392,8 +1387,6 @@ footer.foot {
     symbols = datasets[tab];
     document.querySelectorAll('#phoneTabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
     render();
-    const s = symbols[0];
-    document.getElementById('fab-price').textContent = s.cur + fmtPrice(s.price, s.dec);
   }
 
   document.querySelectorAll('#phoneTabs button').forEach(b => {
@@ -1413,8 +1406,6 @@ footer.foot {
     const btc = datasets.crypto[0], eth = datasets.crypto[1];
     document.getElementById('tk-btc').textContent = fmtPrice(btc.price, 0);
     document.getElementById('tk-eth').textContent = fmtPrice(eth.price, 0);
-    const s = symbols[0];
-    document.getElementById('fab-price').textContent = s.cur + fmtPrice(s.price, s.dec);
   }, 1600);
 
   /* Promo carousel auto-scroll */
