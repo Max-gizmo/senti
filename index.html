@@ -222,7 +222,7 @@ button { font-family: inherit; }
 /* ============ HERO ============ */
 .hero {
   position: relative;
-  padding: 56px 0 96px;
+  padding: 0 0 96px;
   background:
     radial-gradient(800px 400px at 90% 0%, rgba(0,184,107,0.10), transparent 60%),
     radial-gradient(600px 300px at -10% 30%, rgba(0,184,107,0.06), transparent 60%),
@@ -231,19 +231,21 @@ button { font-family: inherit; }
 }
 .hero-grid {
   display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center;
-  margin-top: 56px;
+  margin-top: 24px;
+  padding-top: 72px;
 }
 @media (max-width: 980px) {
   .hero-grid { grid-template-columns: 1fr; gap: 64px; }
 }
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(44px, 6vw, 84px);
+  font-size: clamp(36px, 5vw, 64px);
   line-height: 0.96;
   letter-spacing: -0.035em;
   font-weight: 600;
   margin: 0 0 24px;
-  text-wrap: balance;
+  max-width: 480px;
+  text-wrap: none;
 }
 .hero h1 .accent { color: var(--senti-green); }
 
@@ -274,12 +276,13 @@ button { font-family: inherit; }
 .signup-hint a { color: var(--ink-1000); text-decoration: underline; text-decoration-color: var(--ink-300); }
 
 .store-row {
-  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  display: flex; flex-wrap: nowrap; gap: 10px; align-items: center;
+  max-width: 480px;
 }
 .store {
   display: inline-flex; align-items: center; gap: 10px;
   background: var(--ink-1000); color: white;
-  height: 52px; padding: 0 18px; border-radius: 14px;
+  height: 52px; padding: 0 18px; border-radius: 14px; flex: 1;
   transition: transform 80ms var(--ease-out), background-color 140ms var(--ease-out);
 }
 .store:hover { background: var(--ink-800); }
@@ -290,7 +293,7 @@ button { font-family: inherit; }
 .store .lbl strong { font-size: 15px; font-weight: 600; letter-spacing: -0.2px; }
 .store.pwa { background: white; color: var(--ink-1000); border: 1.5px solid var(--ink-1000); }
 .store.pwa:hover { background: var(--ink-1000); color: white; }
-.store.pwa-sq { border-radius: var(--radius-md); padding: 0; width: 52px; height: 52px; justify-content: center; }
+.store.pwa-sq { border-radius: var(--radius-md); padding: 0; width: 52px; height: 52px; flex: 0 0 52px; justify-content: center; }
 .store.pwa-sq .icon { margin: 0; }
 
 /* ---- Promo Carousel ---- */
@@ -431,7 +434,7 @@ button { font-family: inherit; }
 }
 .phone-tabs button.on { background: white; color: var(--ink-1000); }
 
-.crypto-list { padding: 0 14px 14px; display: flex; flex-direction: column; gap: 4px; }
+.crypto-list { padding: 0 22px 14px; display: flex; flex-direction: column; gap: 4px; }
 .crypto-row {
   display: grid; grid-template-columns: 36px 1fr 70px 76px; gap: 12px;
   align-items: center; padding: 12px 12px;
@@ -757,7 +760,7 @@ footer.foot {
     <div class="hero-grid">
       <div class="hero-left">
         <h1>
-          Инвестируйте <span class="accent">осмысленно</span>.
+          Инвестируйте<br/><span class="accent">осмысленно</span>.
         </h1>
 
         <!-- Investment product cards carousel -->
@@ -860,11 +863,11 @@ footer.foot {
               <div class="live-pill"><span class="dot"></span>В ЭФИРЕ</div>
             </div>
             <div class="phone-tabs" id="phoneTabs">
-              <button class="on" data-tab="crypto">Crypto</button>
-              <button data-tab="forex">Ex</button>
+              <button class="on" data-tab="som">Ex</button>
+              <button data-tab="crypto">Crypto</button>
               <button data-tab="stocks">KG</button>
               <button data-tab="commodities">CFD</button>
-              <button data-tab="forex2">Fx</button>
+              <button data-tab="forex">Fx</button>
             </div>
             <div class="crypto-list" id="cryptoList"></div>
           </div>
@@ -1326,10 +1329,16 @@ footer.foot {
     ],
   };
 
-  let activeTab = 'crypto';
-  let symbols = datasets[activeTab];
+  datasets['som'] = [
+    { sym: 'USD/KGS', name: 'Доллар США',      price: 87.42,  change:  0.12, cls: 'fx fx-usd', glyph: '$',  cur: '', dec: 2 },
+    { sym: 'EUR/KGS', name: 'Евро',            price: 94.68,  change: -0.08, cls: 'fx fx-eur', glyph: '€',  cur: '', dec: 2 },
+    { sym: 'RUB/KGS', name: 'Российский рубль',price:  0.952, change:  0.05, cls: 'fx fx-rub', glyph: '₽',  cur: '', dec: 3 },
+    { sym: 'CNY/KGS', name: 'Китайский юань',  price: 12.04,  change: -0.14, cls: 'fx fx-jpy', glyph: '¥',  cur: '', dec: 2 },
+    { sym: 'KZT/KGS', name: 'Казахский тенге', price:  0.181, change:  0.03, cls: 'fx fx-cad', glyph: '₸',  cur: '', dec: 3 },
+  ];
 
-  datasets['forex2'] = datasets['forex']; // Fx tab reuses forex data
+  let activeTab = 'som';
+  let symbols = datasets[activeTab];
 
   function makeSpark(trend) {
     const points = 24;
