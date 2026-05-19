@@ -235,7 +235,6 @@ button { font-family: inherit; }
 @media (max-width: 980px) {
   .hero-grid { grid-template-columns: 1fr; gap: 64px; }
 }
-.hero-eyebrow { margin-bottom: 24px; }
 .hero h1 {
   font-family: var(--font-display);
   font-size: clamp(44px, 6vw, 84px);
@@ -246,10 +245,6 @@ button { font-family: inherit; }
   text-wrap: balance;
 }
 .hero h1 .accent { color: var(--senti-green); }
-.hero p.lead {
-  font-size: 18px; line-height: 1.55; color: var(--fg-2); max-width: 540px;
-  margin: 0 0 32px; text-wrap: pretty;
-}
 
 .signup-row {
   display: flex; gap: 8px; align-items: stretch; max-width: 480px;
@@ -294,6 +289,59 @@ button { font-family: inherit; }
 .store .lbl strong { font-size: 15px; font-weight: 600; letter-spacing: -0.2px; }
 .store.pwa { background: white; color: var(--ink-1000); border: 1.5px solid var(--ink-1000); }
 .store.pwa:hover { background: var(--ink-1000); color: white; }
+
+/* ---- Promo Carousel ---- */
+.promo-carousel {
+  position: relative; overflow: hidden;
+  margin: 28px 0 32px; border-radius: var(--radius-lg);
+}
+.promo-track {
+  display: flex; transition: transform 500ms var(--ease-out); will-change: transform;
+}
+.promo-card {
+  flex: 0 0 100%; background: var(--card-bg, var(--senti-green-wash));
+  border-radius: var(--radius-lg); padding: 28px 28px 24px;
+  border: 1.5px solid color-mix(in srgb, var(--card-accent, var(--senti-green)) 18%, transparent);
+  display: flex; flex-direction: column; gap: 10px; min-height: 180px;
+}
+.promo-badge {
+  display: inline-flex; align-items: center;
+  background: rgba(0,184,107,0.12); color: var(--card-accent, var(--senti-green));
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: var(--radius-pill); width: fit-content;
+}
+.promo-company {
+  font-size: 17px; font-weight: 700; color: var(--fg-1); letter-spacing: -0.01em; line-height: 1.2;
+}
+.promo-yield {
+  display: flex; align-items: baseline; gap: 6px;
+}
+.promo-yield-num {
+  font-family: var(--font-display); font-size: 36px; font-weight: 700; letter-spacing: -0.04em;
+  color: var(--card-accent, var(--senti-green)); line-height: 1;
+}
+.promo-yield-label {
+  font-size: 13px; color: var(--fg-2); font-weight: 500;
+}
+.promo-desc {
+  font-size: 13px; color: var(--fg-2); line-height: 1.5; flex: 1;
+}
+.promo-cta {
+  display: inline-flex; align-items: center; align-self: flex-start;
+  background: var(--card-accent, var(--senti-green)); color: #fff;
+  font-size: 13px; font-weight: 600; padding: 8px 16px;
+  border-radius: var(--radius-pill); text-decoration: none; margin-top: 4px;
+  transition: opacity 150ms;
+}
+.promo-cta:hover { opacity: 0.85; }
+.promo-dots {
+  display: flex; justify-content: center; gap: 6px; margin-top: 14px;
+}
+.promo-dot {
+  width: 6px; height: 6px; border-radius: 3px; background: var(--ink-300);
+  cursor: pointer; transition: width 300ms var(--ease-out), background 200ms;
+}
+.promo-dot.active { width: 18px; background: var(--senti-green); }
 
 .trust-row {
   display: flex; flex-wrap: wrap; gap: 28px 36px; margin-top: 48px;
@@ -703,14 +751,54 @@ footer.foot {
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-left">
-        <div class="hero-eyebrow eyebrow">Брокер · Лицензия № 045-14211</div>
         <h1>
-          Инвестируйте <span class="accent">осмысленно</span>.<br/>
-          Торгуйте без лишних слов.
+          Инвестируйте <span class="accent">осмысленно</span>.
         </h1>
-        <p class="lead">
-          Senti — современный брокер для тех, кто хочет управлять капиталом так же легко, как сообщениями в телефоне. Криптовалюта, акции и фонды в одном приложении. Доступ к 14 биржам, более 8 000 активов и поддержка 24/7.
-        </p>
+
+        <!-- Investment product cards carousel -->
+        <div class="promo-carousel" id="promoCarousel">
+          <div class="promo-track" id="promoTrack">
+
+            <div class="promo-card" style="--card-accent:#00B86B;--card-bg:#EEFAF2;">
+              <div class="promo-badge">Первичный рынок</div>
+              <div class="promo-company">ОсОО «Бай Элим Компани»</div>
+              <div class="promo-yield"><span class="promo-yield-num">7.5%</span><span class="promo-yield-label">годовых</span></div>
+              <div class="promo-desc">Корпоративные облигации. Начало размещения — 6 апреля 2026 года.</div>
+              <a class="promo-cta" href="#">Подробнее →</a>
+            </div>
+
+            <div class="promo-card" style="--card-accent:#2563EB;--card-bg:#EFF6FF;">
+              <div class="promo-badge" style="background:rgba(37,99,235,0.12);color:#2563EB;">Долларовые облигации</div>
+              <div class="promo-company">ОАО «Каинды-Кант»</div>
+              <div class="promo-yield"><span class="promo-yield-num">7%</span><span class="promo-yield-label">годовых · USD</span></div>
+              <div class="promo-desc">Первый в истории КР публичный выпуск корпоративных облигаций в долларах США.</div>
+              <a class="promo-cta" href="#" style="background:var(--card-accent);">Подробнее →</a>
+            </div>
+
+            <div class="promo-card" style="--card-accent:#7C3AED;--card-bg:#F5F3FF;">
+              <div class="promo-badge" style="background:rgba(124,58,237,0.12);color:#7C3AED;">Субординированные облигации</div>
+              <div class="promo-company">ОАО «Дос-Кредобанк»</div>
+              <div class="promo-yield"><span class="promo-yield-num">18%</span><span class="promo-yield-label">годовых</span></div>
+              <div class="promo-desc">Размещение облигаций банка началось 15 января 2026 года.</div>
+              <a class="promo-cta" href="#" style="background:var(--card-accent);">Подробнее →</a>
+            </div>
+
+            <div class="promo-card" style="--card-accent:#EA580C;--card-bg:#FFF7ED;">
+              <div class="promo-badge" style="background:rgba(234,88,12,0.12);color:#EA580C;">Первичный рынок</div>
+              <div class="promo-company">ОсОО «Альфа Ойл»</div>
+              <div class="promo-yield"><span class="promo-yield-num">18%</span><span class="promo-yield-label">годовых</span></div>
+              <div class="promo-desc">Дебютный выпуск корпоративных облигаций. Листинг на бирже завершён.</div>
+              <a class="promo-cta" href="#" style="background:var(--card-accent);">Подробнее →</a>
+            </div>
+
+          </div>
+          <div class="promo-dots" id="promoDots">
+            <span class="promo-dot active" data-idx="0"></span>
+            <span class="promo-dot" data-idx="1"></span>
+            <span class="promo-dot" data-idx="2"></span>
+            <span class="promo-dot" data-idx="3"></span>
+          </div>
+        </div>
 
         <form class="signup-row" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Готово ✓';">
           <input type="email" placeholder="Ваша электронная почта" aria-label="Email"/>
@@ -1340,6 +1428,34 @@ footer.foot {
     const s = symbols[0];
     document.getElementById('fab-price').textContent = s.cur + fmtPrice(s.price, s.dec);
   }, 1600);
+
+  /* Promo carousel auto-scroll */
+  (function() {
+    const track = document.getElementById('promoTrack');
+    const dots = document.querySelectorAll('.promo-dot');
+    const total = dots.length;
+    let current = 0;
+    let timer;
+
+    function goTo(idx) {
+      current = (idx + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    function next() { goTo(current + 1); }
+
+    function startTimer() { timer = setInterval(next, 3000); }
+    function stopTimer() { clearInterval(timer); }
+
+    dots.forEach(d => {
+      d.addEventListener('click', () => {
+        stopTimer(); goTo(+d.dataset.idx); startTimer();
+      });
+    });
+
+    startTimer();
+  })();
 </script>
 
 </body>
