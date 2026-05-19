@@ -289,6 +289,8 @@ button { font-family: inherit; }
 .store .lbl strong { font-size: 15px; font-weight: 600; letter-spacing: -0.2px; }
 .store.pwa { background: white; color: var(--ink-1000); border: 1.5px solid var(--ink-1000); }
 .store.pwa:hover { background: var(--ink-1000); color: white; }
+.store.pwa-sq { border-radius: var(--radius-md); padding: 0; width: 52px; height: 52px; justify-content: center; }
+.store.pwa-sq .icon { margin: 0; }
 
 /* ---- Promo Carousel ---- */
 .promo-carousel {
@@ -761,9 +763,9 @@ footer.foot {
 
             <div class="promo-card" style="--card-accent:#00B86B;--card-bg:#EEFAF2;">
               <div class="promo-badge">Первичный рынок</div>
-              <div class="promo-company">ОсОО «Бай Элим Компани»</div>
-              <div class="promo-yield"><span class="promo-yield-num">7.5%</span><span class="promo-yield-label">годовых</span></div>
-              <div class="promo-desc">Корпоративные облигации. Начало размещения — 6 апреля 2026 года.</div>
+              <div class="promo-company">ОсОО «СтройДом.кг»</div>
+              <div class="promo-yield"><span class="promo-yield-num">20%</span><span class="promo-yield-label">годовых</span></div>
+              <div class="promo-desc">Корпоративные облигации. Вторичный рынок Кыргызской фондовой биржи.</div>
               <a class="promo-cta" href="#">Подробнее →</a>
             </div>
 
@@ -827,23 +829,13 @@ footer.foot {
               <strong>Google Play</strong>
             </span>
           </a>
-          <a class="store pwa" href="#" aria-label="Установить PWA">
+          <a class="store pwa pwa-sq" href="#" aria-label="Установить PWA">
             <span class="icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg>
-            </span>
-            <span class="lbl">
-              <small>Открыть в браузере</small>
-              <strong>PWA-версия</strong>
             </span>
           </a>
         </div>
 
-        <div class="trust-row">
-          <div class="trust"><div class="num">8 000+</div><div class="lab">торгуемых активов</div></div>
-          <div class="trust"><div class="num">2,1 млн</div><div class="lab">клиентов с 2018 года</div></div>
-          <div class="trust"><div class="num">0,03%</div><div class="lab">средняя комиссия</div></div>
-          <div class="trust"><div class="num">A+</div><div class="lab">рейтинг надёжности</div></div>
-        </div>
       </div>
 
       <!-- Phone mock -->
@@ -866,14 +858,14 @@ footer.foot {
               <div class="live-pill"><span class="dot"></span>В ЭФИРЕ</div>
             </div>
             <div class="phone-tabs" id="phoneTabs">
-              <button class="on" data-tab="crypto">Крипта</button>
-              <button data-tab="stocks">Акции</button>
-              <button data-tab="commodities">Товары</button>
-              <button data-tab="forex">Forex</button>
+              <button class="on" data-tab="crypto">Крипто</button>
+              <button data-tab="forex">Валюта</button>
+              <button data-tab="stocks">KG</button>
+              <button data-tab="commodities">CFD</button>
+              <button data-tab="forex2">Fx</button>
             </div>
             <div class="crypto-list" id="cryptoList"></div>
             <div class="phone-fab">
-              <span id="fab-label">Купить BTC</span>
               <span class="right">
                 <span class="price" id="fab-price">$68 412</span>
                 <span>→</span>
@@ -1341,10 +1333,7 @@ footer.foot {
   let activeTab = 'crypto';
   let symbols = datasets[activeTab];
 
-  const fabLabels = {
-    crypto: 'Купить BTC', stocks: 'Купить AAPL',
-    commodities: 'Купить золото', forex: 'Купить EUR/USD',
-  };
+  datasets['forex2'] = datasets['forex']; // Fx tab reuses forex data
 
   function makeSpark(trend) {
     const points = 24;
@@ -1402,7 +1391,6 @@ footer.foot {
     activeTab = tab;
     symbols = datasets[tab];
     document.querySelectorAll('#phoneTabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
-    document.getElementById('fab-label').textContent = fabLabels[tab];
     render();
     const s = symbols[0];
     document.getElementById('fab-price').textContent = s.cur + fmtPrice(s.price, s.dec);
