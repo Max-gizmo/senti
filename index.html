@@ -222,7 +222,7 @@ button { font-family: inherit; }
 /* ============ HERO ============ */
 .hero {
   position: relative;
-  padding: 16px 0 96px;
+  padding: 0 0 96px;
   background:
     radial-gradient(800px 400px at 90% 0%, rgba(0,184,107,0.10), transparent 60%),
     radial-gradient(600px 300px at -10% 30%, rgba(0,184,107,0.06), transparent 60%),
@@ -240,19 +240,12 @@ button { font-family: inherit; }
 .hero h1 {
   font-family: var(--font-display);
   font-size: clamp(36px, 5vw, 64px);
-  line-height: 1.05;
+  line-height: 0.96;
   letter-spacing: -0.035em;
   font-weight: 600;
   margin: 0 0 24px;
   max-width: 480px;
-  display: flex; flex-direction: column;
-}
-.hero h1 .h1-line {
-  display: block;
-  text-align: justify;
-  text-align-last: justify;
-  text-justify: inter-character;
-  width: 100%;
+  text-wrap: none;
 }
 .hero h1 .accent { color: var(--senti-green); }
 
@@ -370,7 +363,7 @@ button { font-family: inherit; }
 
 /* ============ Phone mock ============ */
 .phone-stage {
-  position: relative; display: flex; justify-content: flex-end; align-items: center;
+  position: relative; display: flex; justify-content: center; align-items: center;
   min-height: 660px;
 }
 .phone-stage::before {
@@ -730,9 +723,6 @@ footer.foot {
 </head>
 <body>
 
-<!-- ============= HERO ============= -->
-<section class="hero" id="hero">
-
 <!-- ============= Dynamic Island Nav ============= -->
 <div class="island-wrap">
   <nav class="island" id="island">
@@ -764,11 +754,13 @@ footer.foot {
   </nav>
 </div>
 
+<!-- ============= HERO ============= -->
+<section class="hero" id="hero">
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-left">
         <h1>
-          <span class="h1-line">Инвестируйте</span><span class="h1-line accent">осмысленно.</span>
+          Инвестируйте<br/><span class="accent">осмысленно</span>.
         </h1>
 
         <!-- Investment product cards carousel -->
