@@ -297,7 +297,7 @@ button { font-family: inherit; }
 .promo-carousel {
   position: relative; overflow: hidden;
   margin: 28px 0 32px; border-radius: var(--radius-lg);
-  max-width: 420px;
+  max-width: 480px;
 }
 .promo-track {
   display: flex; transition: transform 500ms var(--ease-out); will-change: transform;
@@ -389,7 +389,7 @@ button { font-family: inherit; }
 }
 .phone-status {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 14px 26px 6px; font-size: 13px; font-weight: 600; color: white; letter-spacing: -0.1px;
+  padding: 14px 22px 6px; font-size: 13px; font-weight: 600; color: white; letter-spacing: -0.1px;
 }
 .phone-island-inner {
   position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
@@ -398,7 +398,7 @@ button { font-family: inherit; }
 .phone-header {
   padding: 22px 22px 10px; display: flex; justify-content: space-between; align-items: center;
 }
-.phone-header .balance-eyebrow { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+.phone-header .balance-eyebrow { font-size: 13px; color: white; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 700; }
 .phone-header .balance {
   font-family: var(--font-mono); font-feature-settings: 'tnum' 1;
   font-size: 26px; font-weight: 500; letter-spacing: -0.03em; margin-top: 4px;
@@ -419,8 +419,9 @@ button { font-family: inherit; }
 }
 
 .phone-tabs {
-  display: flex; gap: 4px; margin: 6px 22px 14px;
+  display: flex; gap: 0; margin: 6px 22px 14px;
   padding: 4px; border-radius: 999px; background: rgba(255,255,255,0.05);
+  justify-content: space-around;
 }
 .phone-tabs button {
   flex: 1; border: none; background: transparent; cursor: pointer;
@@ -854,13 +855,13 @@ footer.foot {
             <div class="phone-island-inner"></div>
             <div class="phone-header">
               <div>
-                <div class="balance-eyebrow">Котировки</div>
+                <div class="balance-eyebrow">Price</div>
               </div>
               <div class="live-pill"><span class="dot"></span>В ЭФИРЕ</div>
             </div>
             <div class="phone-tabs" id="phoneTabs">
-              <button class="on" data-tab="crypto">Крипто</button>
-              <button data-tab="forex">Валюта</button>
+              <button class="on" data-tab="crypto">Crypto</button>
+              <button data-tab="forex">Ex</button>
               <button data-tab="stocks">KG</button>
               <button data-tab="commodities">CFD</button>
               <button data-tab="forex2">Fx</button>
